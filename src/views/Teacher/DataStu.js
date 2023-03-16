@@ -177,7 +177,7 @@ export default function DataStu() {
                                     margin: "auto",
                                   }}
                                 >
-                                  <p>ผ่านแล้ว</p>
+                                  <p>เรียนครบแล้ว</p>
                                 </div>
                               );
                             } else if (item.status === "NOT PASS") {
