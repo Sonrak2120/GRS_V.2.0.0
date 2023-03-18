@@ -64,11 +64,13 @@ export default function PageAcive({ row2, rows2 }) {
   const [name, setName] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [subcode, setSubcode] = React.useState([]);
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     console.log("row2==", rows2);
     const api_ = async () => {
       let headersList = {
+        Authorization: `Bearer ${token}`,
         Accept: "*/*",
       };
 
@@ -77,7 +79,7 @@ export default function PageAcive({ row2, rows2 }) {
       };
 
       let reqOptions = {
-        url: "http://localhost:5000/get-sub-progress-info-for-teacher", /////////*********************** */
+        url: "http://34.124.184.200:5000/get-sub-progress-info-for-teacher", /////////*********************** */
         method: "PATCH",
         headers: headersList,
         data: bodyContent,

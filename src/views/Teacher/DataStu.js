@@ -8,11 +8,55 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import CheckButton from "./button/CheckButton";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import { pink } from "@mui/material/colors";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 
 import Box from "@mui/material/Box";
 
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+const BootstrapDialogTitle = (props) => {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            color: "white",
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+};
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,15 +87,50 @@ TabPanel.propTypes = {
 export default function DataStu() {
   const [value] = React.useState(0);
   const [rows, setRows] = React.useState([]);
+  const token = sessionStorage.getItem("token");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = async () => {
+    const headerlist = {
+      Accept: "*/*",
+      Authorization: `Bearer ` + token,
+    };
+    try {
+      const delt = await axios({
+        method: "POST",
+        url: "http://34.124.184.200:5000/clear-all",
+        headers: headerlist,
+      });
+
+      if (delt.data.message === "success") {
+        alert("ลบข้อมูลทั้งหมด สำเร็จ");
+        window.location.reload("Refresh");
+      } else {
+        alert("Error ลบข้อมูลไม่สำเร็จ");
+        // window.location.reload("Refresh");
+      }
+      setOpen(false);
+    } catch {
+      alert("Error");
+    }
+  };
 
   useEffect(() => {
     const api_ = async () => {
       let headersList = {
+        Authorization: `Bearer ` + token,
         Accept: "*/*",
       };
 
       let reqOptions = {
-        url: "http://localhost:5000/get-student-data-to-check",
+        url: "http://34.124.184.200:5000/get-student-data-to-check",
         method: "GET",
         headers: headersList,
       };
@@ -84,6 +163,49 @@ export default function DataStu() {
         >
           รายชื่อนิสิตในที่ปรึกษา
         </Typography>
+        <Button onClick={handleClickOpen} variant="contained" color="error">
+          Delete All
+        </Button>
+        <BootstrapDialog onClose={handleClose} open={open}>
+          <BootstrapDialogTitle
+            onClose={handleClose}
+            sx={{
+              backgroundColor: "#F65C5C",
+              color: "#fff",
+              fontFamily: "Kanit",
+              textAlign: "center",
+              fontSize: "26px",
+              height: "65px",
+            }}
+          ></BootstrapDialogTitle>
+          <DialogContent
+            dividers
+            sx={{ width: "500px!important", height: "150px!important" }}
+          >
+            <Grid container direction="row" alignItems="center">
+              <Grid item sx={{ m: "auto" }}>
+                <PriorityHighIcon sx={{ fontSize: 70, color: pink[500] }} />
+              </Grid>
+            </Grid>
+            <Typography
+              align="center"
+              color="error"
+              sx={{ fontFamily: "Kanit" }}
+            >
+              ต้องการลบข้อมูลผู้ใช้หรือไม่?
+            </Typography>
+          </DialogContent>
+          <DialogActions sx={{ backgroundColor: "#D7D7D7" }}>
+            <Button
+              autoFocus
+              color="error"
+              variant="contained"
+              onClick={handleSubmit}
+            >
+              ยืนยัน
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
       </div>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>

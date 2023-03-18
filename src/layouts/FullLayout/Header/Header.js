@@ -3,6 +3,7 @@ import React from "react";
 import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
 
 import Typography from "@mui/material/Typography";
+import Logout from "@material-ui/icons/Logout";
 
 import {
   AppBar,
@@ -14,14 +15,25 @@ import {
   Stack,
   useMediaQuery,
   Paper,
+  Menu,
+  MenuItem,
+  ListItemIcon,
 } from "@material-ui/core";
+
+const onClickLogout = async () => {
+  sessionStorage.clear();
+  window.location.assign("/");
+};
 
 const Header = (props) => {
   // 4
-  const [setAnchorEl4] = React.useState(null);
+  const [anchorEl4, setAnchorEl4] = React.useState(null);
 
   const handleClick4 = (event) => {
     setAnchorEl4(event.currentTarget);
+  };
+  const handleClose4 = () => {
+    setAnchorEl4(null);
   };
 
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
@@ -117,6 +129,39 @@ const Header = (props) => {
           );
         }
       })()}
+      <Menu
+        id="profile-menu"
+        anchorEl={anchorEl4}
+        keepMounted
+        open={Boolean(anchorEl4)}
+        onClose={handleClose4}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        sx={{
+          "& .MuiMenu-paper": {
+            width: "250px",
+            right: 0,
+            top: "70px !important",
+            backgroundColor: "#e2e0e0",
+            borderBlockColor: "black",
+          },
+        }}
+      >
+        <MenuItem
+          onClick={onClickLogout}
+          sx={{
+            "&:hover": {
+              backgroundColor: "#F65C5C",
+              boxShadow: "0 0 3px 1px #525B53",
+            },
+          }}
+        >
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
     </Toolbar>
   );
   if (lgUp) {

@@ -60,6 +60,7 @@ const DropFileInputHTML = (props) => {
   };
 
   const [file, setFile] = useState({});
+  const token = sessionStorage.getItem("token");
 
   const onClickUpload = async () => {
     setLoading(true);
@@ -68,10 +69,10 @@ const DropFileInputHTML = (props) => {
       formData.append("file", file.file);
       const Updatecourse = await axios({
         method: "post",
-        url: "http://127.0.0.1:5000/upload-zip",
+        url: "http://34.124.184.200:5000/upload-zip",
         data: formData,
         headers: {
-          Authorization: `Bearer `,
+          Authorization: `Bearer ` + token,
           Accept: "*/*",
         },
       });
@@ -110,7 +111,7 @@ const DropFileInputHTML = (props) => {
       >
         <div className="drop-file-input__label">
           <img src={uploadImg} alt="" />
-          <p>โปรดเลือกและอัปโหลด ไฟล์ .zip/.rar</p>
+          <p>โปรดเลือกและอัปโหลด ไฟล์ .zip เท่านั้น</p>
         </div>
         <input
           disabled={

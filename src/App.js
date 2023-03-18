@@ -5,6 +5,8 @@ import { baseTheme } from "./assets/global/Theme-variable";
 import { Navigate } from "react-router-dom";
 
 import FullLayoutTeacher from "./layouts/FullLayout/Sidebar/FullLayoutTeacher";
+import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
+import Error from "./routes/Error";
 
 //////////////////////////////////////////Admin
 
@@ -13,17 +15,55 @@ import UploadHtmlNew from "./uplaod/UploadHtmlNew";
 //////////////////////////////////////////Teacher
 import DataStu from "./views/Teacher/DataStu";
 
+////////////////////////////////////
+import LoginPage from "./views/Login/LoginPage";
+import Verify from "./views/Login/Verify";
+import Active from "./views/Login/Active";
+import Forgetpassword from "./views/Login/Forgetpassword";
+import SentToForget from "./views/Login/SentToForget";
+
 const App = () => {
-  const [role] = useState(
+  const [role, SetRole] = useState(
     sessionStorage.getItem("role") ? sessionStorage.getItem("role") : ""
   );
 
-  const TeacherRoute = [
+  const loginRoute = [
     {
       path: "/",
+      element: <LogoOnlyLayout />,
+      children: [
+        { path: "/", element: <Navigate to="/loginpage" /> },
+        { path: "404", element: <Error /> },
+        { path: "*", element: <Navigate to="/404" /> },
+      ],
+    },
+    {
+      path: "/loginpage",
+      element: <LoginPage SetRole={SetRole} />,
+    },
+    {
+      path: "/verify/:token",
+      element: <Verify />,
+    },
+    {
+      path: "/forget/toemail",
+      element: <SentToForget />,
+    },
+    {
+      path: "/forget-password/:token",
+      element: <Forgetpassword />,
+    },
+    {
+      path: "/Actived",
+      element: <Active />,
+    },
+  ];
+
+  const TeacherRoute = [
+    {
+      path: "/teacher",
       element: <FullLayoutTeacher />,
       children: [
-        { path: "/", element: <Navigate to="/teacher" /> },
         { path: "/teacher", element: <DataStu /> },
 
         { path: "/teacher/updatehtml", element: <UploadHtmlNew /> },
@@ -36,11 +76,11 @@ const App = () => {
   ];
 
   const switchRoute = useCallback(() => {
-    if (role === "teacher") {
+    if (role === "admin") {
       return TeacherRoute;
-    } else if (role === "teacher") {
-      return TeacherRoute;
-    } else return TeacherRoute;
+    } else return loginRoute;
+
+    //else return loginRoute;
   }, [role]);
 
   const routing = useRoutes(switchRoute());
