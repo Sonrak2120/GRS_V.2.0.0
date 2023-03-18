@@ -17,10 +17,6 @@ import DataStu from "./views/Teacher/DataStu";
 
 ////////////////////////////////////
 import LoginPage from "./views/Login/LoginPage";
-import Verify from "./views/Login/Verify";
-import Active from "./views/Login/Active";
-import Forgetpassword from "./views/Login/Forgetpassword";
-import SentToForget from "./views/Login/SentToForget";
 
 const App = () => {
   const [role, SetRole] = useState(
@@ -40,22 +36,6 @@ const App = () => {
     {
       path: "/loginpage",
       element: <LoginPage SetRole={SetRole} />,
-    },
-    {
-      path: "/verify/:token",
-      element: <Verify />,
-    },
-    {
-      path: "/forget/toemail",
-      element: <SentToForget />,
-    },
-    {
-      path: "/forget-password/:token",
-      element: <Forgetpassword />,
-    },
-    {
-      path: "/Actived",
-      element: <Active />,
     },
   ];
 
