@@ -1,14 +1,18 @@
 FROM node:latest AS build
-WORKDIR /build
+RUN mkdir -p /usr/src/app
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-RUN npm i
+WORKDIR /usr/src/app
 
-COPY public/ public
-COPY src/ src
+COPY package.json /usr/src/app
+
+RUN npm install
+
+ADD src /usr/src/app/src
+
+ADD public /usr/src/app/public
 RUN npm run build
 
-FROM httpd:alpine
-WORKDIR /var/www/html
-COPY --from=build /build/build/ .
+FROM nginx:alpine
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
