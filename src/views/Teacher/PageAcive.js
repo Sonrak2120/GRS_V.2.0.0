@@ -79,7 +79,7 @@ export default function PageAcive({ row2, rows2 }) {
       };
 
       let reqOptions = {
-        url: "http://34.126.149.156:5000/get-sub-progress-info-for-teacher", /////////*********************** */
+        url: "http://10.36.16.177:5000/get-sub-progress-info-for-teacher", /////////*********************** */
         method: "PATCH",
         headers: headersList,
         data: bodyContent,

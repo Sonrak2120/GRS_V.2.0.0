@@ -122,7 +122,7 @@ export default function DataStu() {
     try {
       const delt = await axios({
         method: "POST",
-        url: "http://34.126.149.156:5000/clear-all",
+        url: "http://10.36.16.177:5000/clear-all",
         headers: headerlist,
       });
 
@@ -153,7 +153,7 @@ export default function DataStu() {
         section: section,
       });
       let reqOptions = {
-        url: "http://34.126.149.156:5000/get-student-data-to-check",
+        url: "http://10.36.16.177:5000/get-student-data-to-check",
         method: "POST",
         headers: headersList,
         data: bodyContent,
@@ -195,7 +195,7 @@ export default function DataStu() {
                 section: section,
               });
               let reqOptions = {
-                url: "http://34.126.149.156:5000/get-student-data-to-check",
+                url: "http://10.36.16.177:5000/get-student-data-to-check",
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
@@ -244,7 +244,7 @@ export default function DataStu() {
                 section: e.target.value,
               });
               let reqOptions = {
-                url: "http://34.126.149.156:5000/get-student-data-to-check",
+                url: "http://10.36.16.177:5000/get-student-data-to-check",
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
@@ -287,7 +287,7 @@ export default function DataStu() {
                 section: section,
               });
               let reqOptions = {
-                url: "http://34.126.149.156:5000/get-student-data-to-check",
+                url: "http://10.36.16.177:5000/get-student-data-to-check",
                 method: "POST",
                 headers: headersList,
                 data: bodyContent,
