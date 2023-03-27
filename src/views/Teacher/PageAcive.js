@@ -219,7 +219,20 @@ export default function PageAcive({ row2, rows2 }) {
                             <div
                               style={{
                                 display: "flex",
-                                color: item[3][0][0] === "N" && "red",
+                                // color: item[3][0][0] === "N" && "red",
+                                color: [
+                                  "A",
+                                  "A+",
+                                  "B",
+                                  "B+",
+                                  "C",
+                                  "C+",
+                                  "D",
+                                  "D+",
+                                  "P",
+                                ].includes(`${item[3][0][0]}`)
+                                  ? "green"
+                                  : "red",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
@@ -250,7 +263,24 @@ export default function PageAcive({ row2, rows2 }) {
                                     <TableCell align="center">
                                       {item[2]}
                                     </TableCell>
-                                    <TableCell align="center">
+                                    <TableCell
+                                      align="center"
+                                      style={{
+                                        color: [
+                                          "A",
+                                          "A+",
+                                          "B",
+                                          "B+",
+                                          "C",
+                                          "C+",
+                                          "D",
+                                          "D+",
+                                          "P",
+                                        ].includes(`${item1[0]}`)
+                                          ? "green"
+                                          : "red",
+                                      }}
+                                    >
                                       {item1[0]}
                                     </TableCell>
                                     <TableCell align="center">
