@@ -1,24 +1,17 @@
 {
   "files": {
-    "main.css": "/pcr/static/css/main.c1981392.chunk.css",
-    "main.js": "/pcr/static/js/main.aef87e21.chunk.js",
-    "main.js.map": "/pcr/static/js/main.aef87e21.chunk.js.map",
-    "runtime-main.js": "/pcr/static/js/runtime-main.f27ee5bc.js",
-    "runtime-main.js.map": "/pcr/static/js/runtime-main.f27ee5bc.js.map",
-    "static/js/2.94e7ed3a.chunk.js": "/pcr/static/js/2.94e7ed3a.chunk.js",
-    "static/js/2.94e7ed3a.chunk.js.map": "/pcr/static/js/2.94e7ed3a.chunk.js.map",
+    "main.css": "/pcr/static/css/main.fce19c9c.css",
+    "main.js": "/pcr/static/js/main.24318312.js",
+    "static/media/logo.png": "/pcr/static/media/logo.5f68ceaddf611b4c424c.png",
+    "static/media/file-css-solid-240.png": "/pcr/static/media/file-css-solid-240.10f985122116f274c5e7.png",
+    "static/media/file-xlsx-solid-240.png": "/pcr/static/media/file-xlsx-solid-240.10f985122116f274c5e7.png",
+    "static/media/file-html-solid-240.png": "/pcr/static/media/file-html-solid-240.485b6e20561ff56f5e38.png",
     "index.html": "/pcr/index.html",
-    "static/css/main.c1981392.chunk.css.map": "/pcr/static/css/main.c1981392.chunk.css.map",
-    "static/js/2.94e7ed3a.chunk.js.LICENSE.txt": "/pcr/static/js/2.94e7ed3a.chunk.js.LICENSE.txt",
-    "static/media/file-css-solid-240.10f98512.png": "/pcr/static/media/file-css-solid-240.10f98512.png",
-    "static/media/file-html-solid-240.485b6e20.png": "/pcr/static/media/file-html-solid-240.485b6e20.png",
-    "static/media/file-xlsx-solid-240.10f98512.png": "/pcr/static/media/file-xlsx-solid-240.10f98512.png",
-    "static/media/logo.5f68cead.png": "/pcr/static/media/logo.5f68cead.png"
+    "main.fce19c9c.css.map": "/pcr/static/css/main.fce19c9c.css.map",
+    "main.24318312.js.map": "/pcr/static/js/main.24318312.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.f27ee5bc.js",
-    "static/js/2.94e7ed3a.chunk.js",
-    "static/css/main.c1981392.chunk.css",
-    "static/js/main.aef87e21.chunk.js"
+    "static/css/main.fce19c9c.css",
+    "static/js/main.24318312.js"
   ]
 }

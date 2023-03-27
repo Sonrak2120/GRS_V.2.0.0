@@ -76,7 +76,7 @@ const DropFileInputHTML = (props) => {
       formData.append("section", section);
       const Updatecourse = await axios({
         method: "post",
-        url: "http://10.36.16.177:5000/upload-zip",
+        url: "http://34.126.149.156:5000/upload-zip",
         data: formData,
         headers: {
           Authorization: `Bearer ` + token,
@@ -96,7 +96,7 @@ const DropFileInputHTML = (props) => {
       alert("บันทึกข้อมูลแล้ว");
       console.log(Updatecourse);
 
-      window.location.assign("/pcr/teacher");
+      window.location.assign("/teacher");
       // window.location.reload("Refresh");
     } catch {
       setLoading(false);

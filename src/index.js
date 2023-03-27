@@ -8,7 +8,7 @@ import Spinner from "./views/Spinner/Spinner";
 
 ReactDOM.render(
   <Suspense fallback={<Spinner />}>
-    <BrowserRouter basename="pcr">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Suspense>,
