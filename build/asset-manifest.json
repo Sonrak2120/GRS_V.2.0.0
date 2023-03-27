@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/pcr/static/css/main.c1981392.chunk.css",
+    "main.js": "/pcr/static/js/main.aef87e21.chunk.js",
+    "main.js.map": "/pcr/static/js/main.aef87e21.chunk.js.map",
+    "runtime-main.js": "/pcr/static/js/runtime-main.f27ee5bc.js",
+    "runtime-main.js.map": "/pcr/static/js/runtime-main.f27ee5bc.js.map",
+    "static/js/2.94e7ed3a.chunk.js": "/pcr/static/js/2.94e7ed3a.chunk.js",
+    "static/js/2.94e7ed3a.chunk.js.map": "/pcr/static/js/2.94e7ed3a.chunk.js.map",
+    "index.html": "/pcr/index.html",
+    "static/css/main.c1981392.chunk.css.map": "/pcr/static/css/main.c1981392.chunk.css.map",
+    "static/js/2.94e7ed3a.chunk.js.LICENSE.txt": "/pcr/static/js/2.94e7ed3a.chunk.js.LICENSE.txt",
+    "static/media/file-css-solid-240.10f98512.png": "/pcr/static/media/file-css-solid-240.10f98512.png",
+    "static/media/file-html-solid-240.485b6e20.png": "/pcr/static/media/file-html-solid-240.485b6e20.png",
+    "static/media/file-xlsx-solid-240.10f98512.png": "/pcr/static/media/file-xlsx-solid-240.10f98512.png",
+    "static/media/logo.5f68cead.png": "/pcr/static/media/logo.5f68cead.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f27ee5bc.js",
+    "static/js/2.94e7ed3a.chunk.js",
+    "static/css/main.c1981392.chunk.css",
+    "static/js/main.aef87e21.chunk.js"
+  ]
+}

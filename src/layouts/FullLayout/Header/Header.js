@@ -22,7 +22,7 @@ import {
 
 const onClickLogout = async () => {
   sessionStorage.clear();
-  window.location.assign("/");
+  window.location.assign("/pcr");
 };
 
 const Header = (props) => {

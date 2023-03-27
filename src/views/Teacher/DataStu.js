@@ -4,7 +4,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import CheckButton from "./button/CheckButton";
@@ -16,6 +18,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
 
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -89,7 +94,19 @@ export default function DataStu() {
   const [rows, setRows] = React.useState([]);
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
+  const [year, setYear] = React.useState("all");
+  const [status, setStatus] = React.useState(2);
+  const [section, setSection] = React.useState("all");
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(0);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -105,7 +122,7 @@ export default function DataStu() {
     try {
       const delt = await axios({
         method: "POST",
-        url: "http://34.124.184.200:5000/clear-all",
+        url: "http://10.36.16.177:5000/clear-all",
         headers: headerlist,
       });
 
@@ -125,17 +142,24 @@ export default function DataStu() {
   useEffect(() => {
     const api_ = async () => {
       let headersList = {
-        Authorization: `Bearer ` + token,
         Accept: "*/*",
+        Authorization: `Bearer ` + token,
+        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
       };
-
+      let bodyContent = JSON.stringify({
+        year: year,
+        status: status,
+        section: section,
+      });
       let reqOptions = {
-        url: "http://34.124.184.200:5000/get-student-data-to-check",
-        method: "GET",
+        url: "http://10.36.16.177:5000/get-student-data-to-check",
+        method: "POST",
         headers: headersList,
+        data: bodyContent,
       };
-
       let response = await axios.request(reqOptions);
+      console.log("response = ", response);
       // setTab(response.data.data);
       setRows(response.data.data.data);
       console.log("row = ", response.data.data.data);
@@ -145,6 +169,142 @@ export default function DataStu() {
 
   return (
     <div>
+      <Box sx={{ minWidth: 120, display: "flex" }}>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            ชั้นปี
+          </InputLabel>
+          <NativeSelect
+            defaultValue={"all"}
+            inputProps={{
+              name: "year",
+              id: "uncontrolled-native",
+            }}
+            onChange={async (e) => {
+              console.log("e.target.value ,status ", e.target.value, status);
+              setYear(e.target.value);
+              let headersList = {
+                Accept: "*/*",
+                Authorization: `Bearer ` + token,
+                // "Content-Type": "application/json",
+                "Content-Type": "application/json",
+              };
+              let bodyContent = JSON.stringify({
+                year: e.target.value,
+                status: status,
+                section: section,
+              });
+              let reqOptions = {
+                url: "http://10.36.16.177:5000/get-student-data-to-check",
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+              };
+              let response = await axios.request(reqOptions);
+              console.log("response = ", response);
+              // setTab(response.data.data);
+              setRows(response.data.data.data);
+              console.log("row = ", response.data.data.data);
+            }}
+          >
+            <option value={"all"}>ทั้งหมด</option>
+            <option value={1}>ปี1</option>
+            <option value={2}>ปี2</option>
+            <option value={3}>ปี3</option>
+            <option value={4}>ปี4</option>
+            <option value={5}>ปี5</option>
+            <option value={6}>ปี6</option>
+            <option value={7}>ปี7</option>
+            <option value={8}>ปี8</option>
+          </NativeSelect>
+        </FormControl>
+        <div style={{ minWidth: "3rem" }}></div>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            ภาค
+          </InputLabel>
+          <NativeSelect
+            defaultValue={"all"}
+            inputProps={{
+              name: "section",
+              id: "uncontrolled-native",
+            }}
+            onChange={async (e) => {
+              console.log("e.target.value ,status ", e.target.value, status);
+              setSection(e.target.value);
+              let headersList = {
+                Accept: "*/*",
+                Authorization: `Bearer ` + token,
+                // "Content-Type": "application/json",
+                "Content-Type": "application/json",
+              };
+              let bodyContent = JSON.stringify({
+                year: year,
+                status: status,
+                section: e.target.value,
+              });
+              let reqOptions = {
+                url: "http://10.36.16.177:5000/get-student-data-to-check",
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+              };
+              let response = await axios.request(reqOptions);
+              console.log("response = ", response);
+              // setTab(response.data.data);
+              setRows(response.data.data.data);
+              console.log("row = ", response.data.data.data);
+            }}
+          >
+            <option value={"all"}>ทั้งหมด</option>
+            <option value={0}>ปกติ</option>
+            <option value={1}>พิเศษ</option>
+          </NativeSelect>
+        </FormControl>
+        <div style={{ minWidth: "3rem" }}></div>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            Status
+          </InputLabel>
+          <NativeSelect
+            defaultValue={2}
+            inputProps={{
+              name: "year",
+              id: "uncontrolled-native",
+            }}
+            onChange={async (e) => {
+              setStatus(Number(e.target.value));
+
+              let headersList = {
+                Accept: "*/*",
+                Authorization: `Bearer ` + token,
+                // "Content-Type": "application/json",
+                "Content-Type": "application/json",
+              };
+              let bodyContent = JSON.stringify({
+                year: year,
+                status: Number(e.target.value),
+                section: section,
+              });
+              let reqOptions = {
+                url: "http://10.36.16.177:5000/get-student-data-to-check",
+                method: "POST",
+                headers: headersList,
+                data: bodyContent,
+              };
+              let response = await axios.request(reqOptions);
+              console.log("response = ", response);
+              // setTab(response.data.data);
+              setRows(response.data.data.data);
+              console.log("row = ", response.data.data.data);
+            }}
+          >
+            <option value={2}>ทั้งหมด</option>
+            <option value={1}>เรียนครบแล้ว</option>
+            <option value={0}>เรียนยังไม่ครบ</option>
+          </NativeSelect>
+        </FormControl>
+      </Box>
       <div
         style={{
           display: "flex",
@@ -218,7 +378,25 @@ export default function DataStu() {
                       sx={{ fontWeight: "bold", fontSize: "16px" }}
                       align="center"
                     >
+                      ลำดับ
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="center"
+                    >
                       รหัสนิสิต
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="left"
+                    >
+                      ชั้นปี
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="left"
+                    >
+                      ภาค
                     </TableCell>
                     <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
                       ชื่อ
@@ -229,6 +407,7 @@ export default function DataStu() {
                     >
                       นามสกุล
                     </TableCell>
+
                     <TableCell
                       sx={{ fontWeight: "bold", fontSize: "16px" }}
                       align="center"
@@ -245,111 +424,137 @@ export default function DataStu() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((item, inx) => (
-                    <TableRow
-                      key={inx}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                        "&:hover": {
-                          backgroundColor: "#D7EAD9",
-                          boxShadow: "0 0 3px 1px #525B53",
-                        },
-                      }}
-                    >
-                      <TableCell sx={{ width: "20%" }} align="center">
-                        {item.std_id}
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        sx={{ width: "20%" }}
+                  {rows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((item, inx) => (
+                      <TableRow
+                        key={inx}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                          "&:hover": {
+                            backgroundColor: "#D7EAD9",
+                            boxShadow: "0 0 3px 1px #525B53",
+                          },
+                        }}
                       >
-                        {item.name}
-                      </TableCell>
-                      <TableCell sx={{ width: "20%" }} align="left">
-                        {item.surname}
-                      </TableCell>
-                      <TableCell sx={{ width: "20%" }} align="center">
-                        <div style={{ display: "flex" }}>
-                          {(() => {
-                            if (item.status === "") {
-                              return (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    color: "brue",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <p>รอการตรวจสอบ</p>
-                                </div>
-                              );
-                            } else if (item.status === "PASS") {
-                              return (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    color: "green",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <p>เรียนครบแล้ว</p>
-                                </div>
-                              );
-                            } else if (item.status === "NOT PASS") {
-                              return (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    color: "red",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <p>เรียนยังไม่ครบ</p>
-                                </div>
-                              );
-                            } else {
-                              return (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    color: "green",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <p>-</p>
-                                </div>
-                              );
-                            }
-                          })()}
-                        </div>
-                      </TableCell>
+                        <TableCell sx={{ width: "5%" }} align="center">
+                          {inx + 1 + page * rowsPerPage}
+                        </TableCell>
+                        <TableCell sx={{ width: "20%" }} align="center">
+                          {item.std_id}
+                        </TableCell>
+                        <TableCell sx={{ width: "7%" }} align="left">
+                          ปี {item.std_year}
+                        </TableCell>
+                        <TableCell sx={{ width: "7%" }} align="left">
+                          {item.section === 0 ? "ปกติ" : "พิเศษ"}
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          sx={{ width: "20%" }}
+                        >
+                          {item.name}
+                        </TableCell>
+                        <TableCell sx={{ width: "20%" }} align="left">
+                          {item.surname}
+                        </TableCell>
 
-                      <TableCell sx={{ width: "20%" }} align="center">
-                        <CheckButton
-                          row={inx}
-                          rows={rows}
-                          setRows={setRows}
-                          std_id={item.std_id}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        <TableCell sx={{ width: "15%" }} align="center">
+                          <div style={{ display: "flex" }}>
+                            {(() => {
+                              if (item.status === "") {
+                                return (
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      color: "brue",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      textAlign: "center",
+                                      margin: "auto",
+                                    }}
+                                  >
+                                    <p>รอการตรวจสอบ</p>
+                                  </div>
+                                );
+                              } else if (item.status === "PASS") {
+                                return (
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      color: "green",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      textAlign: "center",
+                                      margin: "auto",
+                                    }}
+                                  >
+                                    <p>เรียนครบแล้ว</p>
+                                  </div>
+                                );
+                              } else if (item.status === "NOT PASS") {
+                                return (
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      color: "red",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      textAlign: "center",
+                                      margin: "auto",
+                                    }}
+                                  >
+                                    <p>เรียนยังไม่ครบ</p>
+                                  </div>
+                                );
+                              } else {
+                                return (
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      color: "green",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      textAlign: "center",
+                                      margin: "auto",
+                                    }}
+                                  >
+                                    <p>-</p>
+                                  </div>
+                                );
+                              }
+                            })()}
+                          </div>
+                        </TableCell>
+
+                        <TableCell sx={{ width: "20%" }} align="center">
+                          <CheckButton
+                            row={inx}
+                            rows={rows}
+                            setRows={setRows}
+                            std_id={item.std_id}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{
+                ".MuiTablePagination-toolbar": {
+                  color: "rgb(41, 39, 39)",
+                },
+              }}
+            />
           </TabPanel>
           <Box sx={{ p: 3 }} />
         </Box>

@@ -5,7 +5,10 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
-
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
+import DialogTitle from "@mui/material/DialogTitle";
+import InputLabel from "@mui/material/InputLabel";
 import "./drop-file-input.css";
 
 import { ImageConfig } from "../config/ImageConfig";
@@ -60,6 +63,8 @@ const DropFileInputHTML = (props) => {
   };
 
   const [file, setFile] = useState({});
+  const [year, setYear] = useState(1);
+  const [section, setSection] = React.useState(0);
   const token = sessionStorage.getItem("token");
 
   const onClickUpload = async () => {
@@ -67,9 +72,11 @@ const DropFileInputHTML = (props) => {
     try {
       const formData = new FormData();
       formData.append("file", file.file);
+      formData.append("year", year);
+      formData.append("section", section);
       const Updatecourse = await axios({
         method: "post",
-        url: "http://34.124.184.200:5000/upload-zip",
+        url: "http://10.36.16.177:5000/upload-zip",
         data: formData,
         headers: {
           Authorization: `Bearer ` + token,
@@ -89,7 +96,7 @@ const DropFileInputHTML = (props) => {
       alert("บันทึกข้อมูลแล้ว");
       console.log(Updatecourse);
 
-      window.location.assign("/teacher");
+      window.location.assign("/pcr/teacher");
       // window.location.reload("Refresh");
     } catch {
       setLoading(false);
@@ -100,7 +107,53 @@ const DropFileInputHTML = (props) => {
   console.log("fileList", !(fileList.length === 0));
   return (
     <div>
+      <div style={{ display: "flex" }}>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            ชั้นปี
+          </InputLabel>
+          <NativeSelect
+            defaultValue={1}
+            inputProps={{
+              name: "year",
+              id: "uncontrolled-native",
+            }}
+            onChange={async (e) => {
+              setYear(e.target.value);
+            }}
+          >
+            <option value={1}>ปี1</option>
+            <option value={2}>ปี2</option>
+            <option value={3}>ปี3</option>
+            <option value={4}>ปี4</option>
+            <option value={5}>ปี5</option>
+            <option value={6}>ปี6</option>
+            <option value={7}>ปี7</option>
+            <option value={8}>ปี8</option>
+          </NativeSelect>
+        </FormControl>
+        <div style={{ width: "3rem" }}></div>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            ภาค
+          </InputLabel>
+          <NativeSelect
+            defaultValue={0}
+            inputProps={{
+              name: "section",
+              id: "uncontrolled-native",
+            }}
+            onChange={async (e) => {
+              setSection(e.target.value);
+            }}
+          >
+            <option value={0}>ปกติ</option>
+            <option value={1}>พิเศษ</option>
+          </NativeSelect>
+        </FormControl>
+      </div>
       <Progess load={loading} />
+      <div style={{ marginTop: "5rem" }}></div>
       <div
         ref={wrapperRef}
         className="drop-file-input"

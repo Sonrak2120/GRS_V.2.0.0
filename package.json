@@ -1,7 +1,7 @@
 {
   "name": "main",
   "version": "0.1.0",
-  "homepage": "/",
+  "homepage": "/pcr",
   "private": true,
   "dependencies": {
     "@emotion/cache": "^11.4.0",

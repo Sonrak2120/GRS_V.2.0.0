@@ -79,7 +79,7 @@ export default function PageAcive({ row2, rows2 }) {
       };
 
       let reqOptions = {
-        url: "http://34.124.184.200:5000/get-sub-progress-info-for-teacher", /////////*********************** */
+        url: "http://10.36.16.177:5000/get-sub-progress-info-for-teacher", /////////*********************** */
         method: "PATCH",
         headers: headersList,
         data: bodyContent,
@@ -131,7 +131,18 @@ export default function PageAcive({ row2, rows2 }) {
           </TableCell>
           <TableCell>{row.group[0]}</TableCell>
           <TableCell align="center">
-            {row.group[1]} {"หน่วยกิต"}
+            <span
+              style={{
+                color:
+                  Number(row.group[1].split("/")[0]) <
+                  Number(row.group[1].split("/")[1])
+                    ? "red"
+                    : "black",
+              }}
+            >
+              {row.group[1].split("/")[0]}{" "}
+            </span>{" "}
+            {"จาก"} {row.group[1].split("/")[1]} {"หน่วยกิต"}
             {(() => {
               if (row.group[2] === "") {
                 return <></>;

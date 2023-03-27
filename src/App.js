@@ -29,8 +29,8 @@ const App = () => {
       element: <LogoOnlyLayout />,
       children: [
         { path: "/", element: <Navigate to="/loginpage" /> },
-        { path: "404", element: <Error /> },
-        { path: "*", element: <Navigate to="/404" /> },
+        // { path: "404", element: <Error /> },
+        { path: "*", element: <Navigate to="/loginpage" /> },
       ],
     },
     {
