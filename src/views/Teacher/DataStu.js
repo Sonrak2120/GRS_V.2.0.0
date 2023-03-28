@@ -302,6 +302,7 @@ export default function DataStu() {
             <option value={2}>ทั้งหมด</option>
             <option value={1}>เรียนครบแล้ว</option>
             <option value={0}>เรียนยังไม่ครบ</option>
+            <option value={3}>ผิดปกติ</option>
           </NativeSelect>
         </FormControl>
       </Box>
@@ -513,14 +514,14 @@ export default function DataStu() {
                                   <div
                                     style={{
                                       display: "flex",
-                                      color: "green",
+                                      color: "yellow",
                                       alignItems: "center",
                                       justifyContent: "center",
                                       textAlign: "center",
                                       margin: "auto",
                                     }}
                                   >
-                                    <p>-</p>
+                                    <p>ผิดปกติ</p>
                                   </div>
                                 );
                               }
