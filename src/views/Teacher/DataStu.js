@@ -514,7 +514,7 @@ export default function DataStu() {
                                   <div
                                     style={{
                                       display: "flex",
-                                      color: "yellow",
+                                      color: "#e9bf18",
                                       alignItems: "center",
                                       justifyContent: "center",
                                       textAlign: "center",
