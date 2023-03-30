@@ -441,7 +441,7 @@ export default function DataStu() {
                         <TableCell sx={{ width: "5%" }} align="center">
                           {inx + 1 + page * rowsPerPage}
                         </TableCell>
-                        <TableCell sx={{ width: "20%" }} align="center">
+                        <TableCell sx={{ width: "15%" }} align="center">
                           {item.std_id}
                         </TableCell>
                         <TableCell sx={{ width: "7%" }} align="left">
@@ -535,6 +535,8 @@ export default function DataStu() {
                             rows={rows}
                             setRows={setRows}
                             std_id={item.std_id}
+                            page={page}
+                            rowsPerPage={rowsPerPage}
                           />
                         </TableCell>
                       </TableRow>

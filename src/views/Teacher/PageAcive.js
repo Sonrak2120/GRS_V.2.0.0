@@ -53,10 +53,17 @@ const Table_custom = styled("Table")(({ theme }) => ({
   },
 }));
 
-export default function PageAcive({ row2, rows2 }) {
+export default function PageAcive({
+  row2,
+  rows2,
+  setStname,
+  setStsurname,
+  page,
+  rowsPerPage,
+}) {
   const [StId, setStId] = React.useState([]);
-  const [Stname, setStname] = React.useState([]);
-  const [Stsurname, setStsurname] = React.useState([]);
+  // const [Stname, setStname] = React.useState([]);
+  // const [Stsurname, setStsurname] = React.useState([]);
   const [check, setCheck] = React.useState([]);
 
   const [rows, setRows] = React.useState([]);
@@ -67,6 +74,9 @@ export default function PageAcive({ row2, rows2 }) {
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
+    setStId(rows2[row2 + page * rowsPerPage].std_id);
+    setStname(rows2[row2 + page * rowsPerPage].name);
+    setStsurname(rows2[row2 + page * rowsPerPage].surname);
     console.log("row2==", rows2);
     const api_ = async () => {
       let headersList = {
@@ -75,7 +85,7 @@ export default function PageAcive({ row2, rows2 }) {
       };
 
       let bodyContent = {
-        std_id: rows2[row2].std_id,
+        std_id: rows2[row2 + page * rowsPerPage].std_id,
       };
 
       let reqOptions = {
@@ -99,9 +109,6 @@ export default function PageAcive({ row2, rows2 }) {
       response.data.sub_code.map((item) => temp.push(0));
 
       setCheck(temp);
-      setStId(rows2[0].std_id);
-      setStname(rows2[0].name);
-      setStsurname(rows2[0].surname);
     };
     api_();
   }, []);

@@ -50,9 +50,17 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CheckButton({ row, rows, setRows, std_id }) {
+export default function CheckButton({
+  row,
+  rows,
+  setRows,
+  std_id,
+  page,
+  rowsPerPage,
+}) {
   const [open, setOpen] = React.useState(false);
-
+  const [name, setname] = React.useState("");
+  const [surname, setsurname] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -74,7 +82,13 @@ export default function CheckButton({ row, rows, setRows, std_id }) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          ตรวจสอบการการรียนของนิสิตในที่ปรึกษา
+          <div style={{ display: "flex" }}>
+            <p>ตรวจสอบการการรียนของนิสิตในที่ปรึกษา</p>
+            <p style={{ marginLeft: "auto" }}>
+              รหัสนิสิต {std_id} | ชื่อนิสิต {name} {surname}
+            </p>
+            <div style={{ marginRight: "2rem" }}></div>
+          </div>
         </BootstrapDialogTitle>
         <DialogContent dividers style={{ width: "100%" }}>
           <PageAcive
@@ -82,6 +96,10 @@ export default function CheckButton({ row, rows, setRows, std_id }) {
             rows2={rows}
             setRows={setRows}
             std_id={std_id}
+            setStname={setname}
+            setStsurname={setsurname}
+            page={page}
+            rowsPerPage={rowsPerPage}
           />
         </DialogContent>
         <DialogActions>
