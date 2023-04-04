@@ -142,7 +142,7 @@ export default function PageAcive({
               style={{
                 color:
                   Number(row.group[1].split("/")[0]) <
-                  Number(row.group[1].split("/")[1])
+                    Number(row.group[1].split("/")[1])
                     ? "red"
                     : "black",
               }}
@@ -237,7 +237,7 @@ export default function PageAcive({
                                   "D",
                                   "D+",
                                   "P",
-                                ].includes(`${item[3][0][0]}`)
+                                ].includes(`${item[3][0][0].split(' ')[0]}`) && item[3][0][0].split(' ').length === 2
                                   ? "green"
                                   : "red",
                                 alignItems: "center",
@@ -283,7 +283,7 @@ export default function PageAcive({
                                           "D",
                                           "D+",
                                           "P",
-                                        ].includes(`${item1[0]}`)
+                                        ].includes(`${item1[0].split(' ')[0]}`) && item1[0].split(' ').length === 2
                                           ? "green"
                                           : "red",
                                       }}
