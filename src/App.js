@@ -14,10 +14,10 @@ import UploadHtmlNew from "./uplaod/UploadHtmlNew";
 
 //////////////////////////////////////////Teacher
 import DataStu from "./views/Teacher/DataStu";
-
+import DataCourse from "./views/Teacher/DataCourse";
 ////////////////////////////////////
 import LoginPage from "./views/Login/LoginPage";
-
+import DataGenSub from "./views/Teacher/DataGenSub";
 const App = () => {
   const [role, SetRole] = useState(
     sessionStorage.getItem("role") ? sessionStorage.getItem("role") : ""
@@ -45,7 +45,8 @@ const App = () => {
       element: <FullLayoutTeacher />,
       children: [
         { path: "/teacher", element: <DataStu /> },
-
+        { path: "/teacher/updategensub", element: <DataGenSub /> },
+        { path: "/teacher/updatecourse", element: <DataCourse /> },
         { path: "/teacher/updatehtml", element: <UploadHtmlNew /> },
         {
           path: "*",

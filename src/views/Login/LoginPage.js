@@ -36,7 +36,7 @@ export default function LoginPage({ SetRole }) {
     };
     try {
       const resp = await axios.post(
-        "http://10.36.16.177:5000/log-in",
+        "http://127.0.0.1:5000/log-in",
         {
           email: email,
           password: password,

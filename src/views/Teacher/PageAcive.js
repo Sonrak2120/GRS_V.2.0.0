@@ -89,7 +89,7 @@ export default function PageAcive({
       };
 
       let reqOptions = {
-        url: "http://10.36.16.177:5000/get-sub-progress-info-for-teacher", /////////*********************** */
+        url: "http://127.0.0.1:5000/get-sub-progress-info-for-teacher", /////////*********************** */
         method: "PATCH",
         headers: headersList,
         data: bodyContent,
@@ -142,7 +142,7 @@ export default function PageAcive({
               style={{
                 color:
                   Number(row.group[1].split("/")[0]) <
-                    Number(row.group[1].split("/")[1])
+                  Number(row.group[1].split("/")[1])
                     ? "red"
                     : "black",
               }}
@@ -227,19 +227,22 @@ export default function PageAcive({
                               style={{
                                 display: "flex",
                                 // color: item[3][0][0] === "N" && "red",
-                                color: [
-                                  "A",
-                                  "A+",
-                                  "B",
-                                  "B+",
-                                  "C",
-                                  "C+",
-                                  "D",
-                                  "D+",
-                                  "P",
-                                ].includes(`${item[3][0][0].split(' ')[0]}`) && item[3][0][0].split(' ').length === 2
-                                  ? "green"
-                                  : "red",
+                                color:
+                                  [
+                                    "A",
+                                    "A+",
+                                    "B",
+                                    "B+",
+                                    "C",
+                                    "C+",
+                                    "D",
+                                    "D+",
+                                    "P",
+                                  ].includes(
+                                    `${item[3][0][0].split(" ")[0]}`
+                                  ) && item[3][0][0].split(" ").length === 2
+                                    ? "green"
+                                    : "red",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
@@ -273,19 +276,22 @@ export default function PageAcive({
                                     <TableCell
                                       align="center"
                                       style={{
-                                        color: [
-                                          "A",
-                                          "A+",
-                                          "B",
-                                          "B+",
-                                          "C",
-                                          "C+",
-                                          "D",
-                                          "D+",
-                                          "P",
-                                        ].includes(`${item1[0].split(' ')[0]}`) && item1[0].split(' ').length === 2
-                                          ? "green"
-                                          : "red",
+                                        color:
+                                          [
+                                            "A",
+                                            "A+",
+                                            "B",
+                                            "B+",
+                                            "C",
+                                            "C+",
+                                            "D",
+                                            "D+",
+                                            "P",
+                                          ].includes(
+                                            `${item1[0].split(" ")[0]}`
+                                          ) && item1[0].split(" ").length === 2
+                                            ? "green"
+                                            : "red",
                                       }}
                                     >
                                       {item1[0]}
