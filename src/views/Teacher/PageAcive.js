@@ -89,7 +89,7 @@ export default function PageAcive({
       };
 
       let reqOptions = {
-        url: "http://127.0.0.1:5000/get-sub-progress-info-for-teacher", /////////*********************** */
+        url: "http://10.36.16.177:5000/get-sub-progress-info-for-teacher", /////////*********************** */
         method: "PATCH",
         headers: headersList,
         data: bodyContent,
@@ -142,7 +142,7 @@ export default function PageAcive({
               style={{
                 color:
                   Number(row.group[1].split("/")[0]) <
-                  Number(row.group[1].split("/")[1])
+                    Number(row.group[1].split("/")[1])
                     ? "red"
                     : "black",
               }}

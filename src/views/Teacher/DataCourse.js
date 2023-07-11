@@ -109,7 +109,7 @@ export default function DataCourse() {
       formData.append("file_course", file.file);
       const Updatecourse = await axios({
         method: "PATCH",
-        url: "http://127.0.0.1:5000/add-course",
+        url: "http://10.36.16.177:5000/add-course",
         data: formData,
         headers: {
           Authorization: `Bearer ` + token,
@@ -155,7 +155,7 @@ export default function DataCourse() {
       course_id: sub_to_del,
     });
     let reqOptions = {
-      url: "http://127.0.0.1:5000/del-course-info",
+      url: "http://10.36.16.177:5000/del-course-info",
       method: "PUT",
       headers: headersList,
       data: bodyContent,
@@ -181,7 +181,7 @@ export default function DataCourse() {
         section: section,
       });
       let reqOptions = {
-        url: "http://127.0.0.1:5000/get-course-info",
+        url: "http://10.36.16.177:5000/get-course-info",
         method: "GET",
         headers: headersList,
         data: bodyContent,
@@ -407,7 +407,7 @@ export default function DataCourse() {
             padding: "10px",
           }}
         >
-          <a href="http://127.0.0.1:5000/download-add-subject-form">
+          <a href="http://10.36.16.177:5000/download-add-subject-form">
             Download ตัวอย่าง
           </a>
         </div>
